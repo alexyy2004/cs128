@@ -1,0 +1,125 @@
+==10445== Memcheck, a memory error detector
+==10445== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==10445== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==10445== Command: ./bin/exec
+==10445== Parent PID: 8187
+==10445== 
+==10445== Conditional jump or move depends on uninitialised value(s)
+==10445==    at 0x109B04: Cord::~Cord() (cord.hpp:26)
+==10445==    by 0x1097B3: SharedPointer<Cord>::~SharedPointer() (shared_pointer.hpp:36)
+==10445==    by 0x109143: main (driver.cc:17)
+==10445== 
+==10445== Use of uninitialised value of size 8
+==10445==    at 0x1096D4: SharedPointer<Cord>::~SharedPointer() (shared_pointer.hpp:29)
+==10445==    by 0x109B2F: Cord::~Cord() (cord.hpp:28)
+==10445==    by 0x1097B3: SharedPointer<Cord>::~SharedPointer() (shared_pointer.hpp:36)
+==10445==    by 0x109143: main (driver.cc:17)
+==10445== 
+==10445== Invalid read of size 4
+==10445==    at 0x1096D4: SharedPointer<Cord>::~SharedPointer() (shared_pointer.hpp:29)
+==10445==    by 0x109B2F: Cord::~Cord() (cord.hpp:28)
+==10445==    by 0x1097B3: SharedPointer<Cord>::~SharedPointer() (shared_pointer.hpp:36)
+==10445==    by 0x109143: main (driver.cc:17)
+==10445==  Address 0x1fff00057800 is not stack'd, malloc'd or (recently) free'd
+==10445== 
+==10445== 
+==10445== Process terminating with default action of signal 11 (SIGSEGV)
+==10445==  Access not within mapped region at address 0x1FFF00057800
+==10445==    at 0x1096D4: SharedPointer<Cord>::~SharedPointer() (shared_pointer.hpp:29)
+==10445==    by 0x109B2F: Cord::~Cord() (cord.hpp:28)
+==10445==    by 0x1097B3: SharedPointer<Cord>::~SharedPointer() (shared_pointer.hpp:36)
+==10445==    by 0x109143: main (driver.cc:17)
+==10445==  If you believe this happened as a result of a stack
+==10445==  overflow in your program's main thread (unlikely but
+==10445==  possible), you can try to increase the size of the
+==10445==  main thread stack using the --main-stacksize= flag.
+==10445==  The main thread stack size used in this run was 8388608.
+==10445== 
+==10445== HEAP SUMMARY:
+==10445==     in use at exit: 73,889 bytes in 12 blocks
+==10445==   total heap usage: 13 allocs, 1 frees, 73,893 bytes allocated
+==10445== 
+==10445== 4 bytes in 1 blocks are still reachable in loss record 1 of 12
+==10445==    at 0x4866AE8: operator new[](unsigned long) (in /usr/libexec/valgrind/vgpreload_memcheck-arm64-linux.so)
+==10445==    by 0x1092F3: Cord::Cord(std::basic_string_view<char, std::char_traits<char> >) (cord.hpp:14)
+==10445==    by 0x1090CB: main (driver.cc:7)
+==10445== 
+==10445== 4 bytes in 1 blocks are still reachable in loss record 2 of 12
+==10445==    at 0x48657B8: operator new(unsigned long) (in /usr/libexec/valgrind/vgpreload_memcheck-arm64-linux.so)
+==10445==    by 0x10949F: SharedPointer<Cord>::SharedPointer(Cord*, kSharedPointerType) (shared_pointer.hpp:14)
+==10445==    by 0x10939B: Cord::Cord(std::basic_string_view<char, std::char_traits<char> >) (cord.hpp:20)
+==10445==    by 0x1090CB: main (driver.cc:7)
+==10445== 
+==10445== 4 bytes in 1 blocks are still reachable in loss record 3 of 12
+==10445==    at 0x48657B8: operator new(unsigned long) (in /usr/libexec/valgrind/vgpreload_memcheck-arm64-linux.so)
+==10445==    by 0x10949F: SharedPointer<Cord>::SharedPointer(Cord*, kSharedPointerType) (shared_pointer.hpp:14)
+==10445==    by 0x1093C7: Cord::Cord(std::basic_string_view<char, std::char_traits<char> >) (cord.hpp:21)
+==10445==    by 0x1090CB: main (driver.cc:7)
+==10445== 
+==10445== 4 bytes in 1 blocks are still reachable in loss record 4 of 12
+==10445==    at 0x48657B8: operator new(unsigned long) (in /usr/libexec/valgrind/vgpreload_memcheck-arm64-linux.so)
+==10445==    by 0x10949F: SharedPointer<Cord>::SharedPointer(Cord*, kSharedPointerType) (shared_pointer.hpp:14)
+==10445==    by 0x1090DF: main (driver.cc:7)
+==10445== 
+==10445== 4 bytes in 1 blocks are still reachable in loss record 5 of 12
+==10445==    at 0x48657B8: operator new(unsigned long) (in /usr/libexec/valgrind/vgpreload_memcheck-arm64-linux.so)
+==10445==    by 0x10949F: SharedPointer<Cord>::SharedPointer(Cord*, kSharedPointerType) (shared_pointer.hpp:14)
+==10445==    by 0x10939B: Cord::Cord(std::basic_string_view<char, std::char_traits<char> >) (cord.hpp:20)
+==10445==    by 0x10910F: main (driver.cc:8)
+==10445== 
+==10445== 4 bytes in 1 blocks are still reachable in loss record 6 of 12
+==10445==    at 0x48657B8: operator new(unsigned long) (in /usr/libexec/valgrind/vgpreload_memcheck-arm64-linux.so)
+==10445==    by 0x10949F: SharedPointer<Cord>::SharedPointer(Cord*, kSharedPointerType) (shared_pointer.hpp:14)
+==10445==    by 0x1093C7: Cord::Cord(std::basic_string_view<char, std::char_traits<char> >) (cord.hpp:21)
+==10445==    by 0x10910F: main (driver.cc:8)
+==10445== 
+==10445== 4 bytes in 1 blocks are still reachable in loss record 7 of 12
+==10445==    at 0x48657B8: operator new(unsigned long) (in /usr/libexec/valgrind/vgpreload_memcheck-arm64-linux.so)
+==10445==    by 0x10949F: SharedPointer<Cord>::SharedPointer(Cord*, kSharedPointerType) (shared_pointer.hpp:14)
+==10445==    by 0x109123: main (driver.cc:8)
+==10445== 
+==10445== 5 bytes in 1 blocks are still reachable in loss record 8 of 12
+==10445==    at 0x4866AE8: operator new[](unsigned long) (in /usr/libexec/valgrind/vgpreload_memcheck-arm64-linux.so)
+==10445==    by 0x1092F3: Cord::Cord(std::basic_string_view<char, std::char_traits<char> >) (cord.hpp:14)
+==10445==    by 0x10910F: main (driver.cc:8)
+==10445== 
+==10445== 64 bytes in 1 blocks are still reachable in loss record 9 of 12
+==10445==    at 0x48657B8: operator new(unsigned long) (in /usr/libexec/valgrind/vgpreload_memcheck-arm64-linux.so)
+==10445==    by 0x1090A7: main (driver.cc:7)
+==10445== 
+==10445== 64 bytes in 1 blocks are still reachable in loss record 10 of 12
+==10445==    at 0x48657B8: operator new(unsigned long) (in /usr/libexec/valgrind/vgpreload_memcheck-arm64-linux.so)
+==10445==    by 0x1090E7: main (driver.cc:8)
+==10445== 
+==10445== 1,024 bytes in 1 blocks are still reachable in loss record 11 of 12
+==10445==    at 0x4865058: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-arm64-linux.so)
+==10445==    by 0x4BF88F3: _IO_file_doallocate (filedoalloc.c:101)
+==10445==    by 0x4C071FF: _IO_doallocbuf (genops.c:347)
+==10445==    by 0x4C071FF: _IO_doallocbuf (genops.c:342)
+==10445==    by 0x4C065C7: _IO_file_overflow@@GLIBC_2.17 (fileops.c:744)
+==10445==    by 0x4C05717: _IO_new_file_xsputn (fileops.c:1243)
+==10445==    by 0x4C05717: _IO_file_xsputn@@GLIBC_2.17 (fileops.c:1196)
+==10445==    by 0x4BF9E6F: fwrite (iofwrite.c:39)
+==10445==    by 0x49C2CA7: std::basic_ostream<char, std::char_traits<char> >& std::__ostream_insert<char, std::char_traits<char> >(std::basic_ostream<char, std::char_traits<char> >&, char const*, long) (in /usr/lib/aarch64-linux-gnu/libstdc++.so.6.0.30)
+==10445==    by 0x49C2FDF: std::basic_ostream<char, std::char_traits<char> >& std::operator<< <std::char_traits<char> >(std::basic_ostream<char, std::char_traits<char> >&, char const*) (in /usr/lib/aarch64-linux-gnu/libstdc++.so.6.0.30)
+==10445==    by 0x1095FB: ConcatCords(SharedPointer<Cord> const&, SharedPointer<Cord> const&) (cord_utilities.hpp:17)
+==10445==    by 0x109137: main (driver.cc:9)
+==10445== 
+==10445== 72,704 bytes in 1 blocks are still reachable in loss record 12 of 12
+==10445==    at 0x4865058: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-arm64-linux.so)
+==10445==    by 0x492EAA7: ??? (in /usr/lib/aarch64-linux-gnu/libstdc++.so.6.0.30)
+==10445==    by 0x4005623: call_init (dl-init.c:70)
+==10445==    by 0x4005623: call_init (dl-init.c:26)
+==10445==    by 0x400572B: _dl_init (dl-init.c:117)
+==10445==    by 0x4017C87: ??? (in /usr/lib/aarch64-linux-gnu/ld-linux-aarch64.so.1)
+==10445== 
+==10445== LEAK SUMMARY:
+==10445==    definitely lost: 0 bytes in 0 blocks
+==10445==    indirectly lost: 0 bytes in 0 blocks
+==10445==      possibly lost: 0 bytes in 0 blocks
+==10445==    still reachable: 73,889 bytes in 12 blocks
+==10445==         suppressed: 0 bytes in 0 blocks
+==10445== 
+==10445== Use --track-origins=yes to see where uninitialised values come from
+==10445== For lists of detected and suppressed errors, rerun with: -s
+==10445== ERROR SUMMARY: 3 errors from 3 contexts (suppressed: 0 from 0)
