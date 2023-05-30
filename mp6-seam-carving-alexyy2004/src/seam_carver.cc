@@ -32,15 +32,43 @@ int SeamCarver::GetEnergy(int row, int col) const {
 
 int* SeamCarver::GetHorizontalSeam() const{
   int** verticalvalue = new int*[height_];
-  for (int i = 0; i < height_; ++i) {verticalvalue[i] = new int[width_];}
-  for (int i = 0; i < height_; ++i) {for (int j = 0; j < width_; ++j) {verticalvalue[i][j] = GetEnergy(i, j);}}
-  for (int col = width_ - 2; col >= 0; col--) {for (int row = 0; row < height_; row++) {if (row == 0) {verticalvalue[row][col] += std::min(verticalvalue[row][col + 1], verticalvalue[row + 1][col + 1]);} else if (row == height_ - 1) {verticalvalue[row][col] += std::min(verticalvalue[row][col + 1], verticalvalue[row - 1][col + 1]);} else {int temp = std::min(verticalvalue[row - 1][col + 1], verticalvalue[row][col + 1]);verticalvalue[row][col] += std::min(temp, verticalvalue[row + 1][col + 1]);}} }
+  for (int i = 0; i < height_; ++i) {
+    verticalvalue[i] = new int[width_];
+  }
+  for (int i = 0; i < height_; ++i) {
+    for (int j = 0; j < width_; ++j) {
+      verticalvalue[i][j] = GetEnergy(i, j);
+    }
+  }
+  for (int col = width_ - 2; col >= 0; col--) {
+    for (int row = 0; row < height_; row++) {
+      if (row == 0) {
+        verticalvalue[row][col] += std::min(verticalvalue[row][col + 1], verticalvalue[row + 1][col + 1]);
+      } else if (row == height_ - 1) {
+        verticalvalue[row][col] += std::min(verticalvalue[row][col + 1], verticalvalue[row - 1][col + 1]);
+      } else {
+        int temp = std::min(verticalvalue[row - 1][col + 1], verticalvalue[row][col + 1]);
+        verticalvalue[row][col] += std::min(temp, verticalvalue[row + 1][col + 1]);
+      }
+    } 
+  }
   int* result = new int[width_];
   int min = verticalvalue[0][0];
   int minindex = 0;
-  for (int row = 1; row < height_; row++) {if (verticalvalue[row][0] < min) {min = verticalvalue[row][0];minindex = row;}}
+  for (int row = 1; row < height_; row++) {
+    if (verticalvalue[row][0] < min) {
+      min = verticalvalue[row][0];minindex = row;
+    }
+  }
   result[0] = minindex;
-  for (int col = 1; col < width_; col++) {int index = 0;if (result[col - 1] == 0) {if (verticalvalue[0][col] <= verticalvalue[1][col]) {index = 0;} else {index = 1;}
+  for (int col = 1; col < width_; col++) {
+    int index = 0;
+    if (result[col - 1] == 0) {
+      if (verticalvalue[0][col] <= verticalvalue[1][col]) {
+        index = 0;
+      } else {
+        index = 1;
+      }
     } else if (result[col - 1] == height_ - 1) {
       if (verticalvalue[result[col - 1] - 1][col] >= verticalvalue[result[col - 1]][col]) {
         index = result[col - 1];
@@ -74,15 +102,52 @@ int* SeamCarver::GetHorizontalSeam() const{
 
 int* SeamCarver::GetVerticalSeam() const {
   int** horizontalvalue = new int*[height_];
-  for (int i = 0; i < height_; ++i) {horizontalvalue[i] = new int[width_];}
-  for (int i = 0; i < height_; ++i) {for (int j = 0; j < width_; ++j) {horizontalvalue[i][j] = GetEnergy(i, j);}}
-  for (int i = height_ - 2; i >= 0; i--) {for (int j = 0; j < width_; j++) {if (j == 0) {horizontalvalue[i][j] += std::min(horizontalvalue[i + 1][j], horizontalvalue[i + 1][j + 1]);} else if (j == width_ - 1) {horizontalvalue[i][j] += std::min(horizontalvalue[i + 1][j - 1], horizontalvalue[i + 1][j]);} else {int temp = std::min(horizontalvalue[i + 1][j - 1], horizontalvalue[i + 1][j]);horizontalvalue[i][j] += std::min(temp, horizontalvalue[i + 1][j + 1]);}}}
+  for (int i = 0; i < height_; ++i) {
+    horizontalvalue[i] = new int[width_];
+  }
+  for (int i = 0; i < height_; ++i) {
+    for (int j = 0; j < width_; ++j) {
+      horizontalvalue[i][j] = GetEnergy(i, j);
+    }
+  }
+  for (int i = height_ - 2; i >= 0; i--) {
+    for (int j = 0; j < width_; j++) {
+      if (j == 0) {
+        horizontalvalue[i][j] += std::min(horizontalvalue[i + 1][j], horizontalvalue[i + 1][j + 1]);
+      } else if (j == width_ - 1) {
+        horizontalvalue[i][j] += std::min(horizontalvalue[i + 1][j - 1], horizontalvalue[i + 1][j]);
+      } else {
+        int temp = std::min(horizontalvalue[i + 1][j - 1], horizontalvalue[i + 1][j]);
+        horizontalvalue[i][j] += std::min(temp, horizontalvalue[i + 1][j + 1]);
+      }
+    }
+  }
   int* result = new int[height_];
   int min = horizontalvalue[0][0];
   int minindex = 0;
-  for (int i = 0; i < width_; i++) {if (horizontalvalue[0][i] < min) {min = horizontalvalue[0][i];minindex = i;}}
+  for (int i = 0; i < width_; i++) {
+    if (horizontalvalue[0][i] < min) {
+      min = horizontalvalue[0][i];
+      minindex = i;
+    }
+  }
   result[0] = minindex;
-  for (int row = 1; row < height_; row++) {int index = 0;if (result[row - 1] == 0) {if (horizontalvalue[row][0] <= horizontalvalue[row][1]) {index = 0;} else {index = 1;}} else if (result[row - 1] == width_ - 1) {int col = result[row - 1];if (horizontalvalue[row][col - 1] >= horizontalvalue[row][col]) {index = col;} else {index = col - 1;}} else {
+  for (int row = 1; row < height_; row++) {
+    int index = 0;
+    if (result[row - 1] == 0) {
+      if (horizontalvalue[row][0] <= horizontalvalue[row][1]) {
+        index = 0;
+      } else {
+        index = 1;
+      }
+    } else if (result[row - 1] == width_ - 1) {
+      int col = result[row - 1];
+      if (horizontalvalue[row][col - 1] >= horizontalvalue[row][col]) {
+        index = col;
+      } else {
+        index = col - 1;
+      }
+    } else {
       int col = result[row - 1];
       if (horizontalvalue[row][col - 1] == horizontalvalue[row][col] && horizontalvalue[row][col] == horizontalvalue[row][col + 1]) {
         index = col;
